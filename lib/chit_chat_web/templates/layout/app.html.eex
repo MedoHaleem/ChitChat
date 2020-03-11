@@ -18,7 +18,9 @@
         </nav>
       </section>
     </header>
-   User ID:<%= @conn.assigns[:user_id] %>
+    <%= if @current_user do %>
+   User ID:<%= @current_user.id %>
+    <% end %>
     <main role="main" class="container">
       <p class="alert alert-info" role="alert"><%= get_flash(@conn, :info) %></p>
       <p class="alert alert-danger" role="alert"><%= get_flash(@conn, :error) %></p>
