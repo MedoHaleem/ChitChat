@@ -34,8 +34,10 @@ defmodule ChitChat.Auth do
   end
 
   def put_current_user(conn, user) do
+    token = user && Phoenix.Token.sign(conn, "user socket", user.id)
     conn
     |> assign(:current_user, user)
     |> assign(:admin_user, !!user && !!user.credential && user.credential.email == "test@test.com")
+    |> assign(:user_token, token)
   end
 end

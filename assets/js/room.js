@@ -1,5 +1,6 @@
 let Room = {
     init(socket, el) {
+        if (!el) return
         let roomId = el.getAttribute("data-id")
         console.log(`element: ${el}, roomId: ${roomId}`)
         socket.connect()
@@ -31,11 +32,11 @@ let Room = {
         div.appendChild(document.createTextNode(input))
         return div.innerHTML
     },
-    renderChat(msgContainer, {body}) {
+    renderChat(msgContainer, {username, body}) {
         let div = document.createElement("div")
         div.innerHTML = `
         <span>
-        <strong>anon</strong>: ${this.esc(body)}
+        <strong>${this.esc(username)}</strong>: ${this.esc(body)}
         </span>
         `
         msgContainer.appendChild(div)
